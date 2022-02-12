@@ -2,7 +2,7 @@ import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-
+print(setuptools.find_packages())
 setuptools.setup(
     name="kaggle-kernelifier",
     version="1.0.0",
@@ -12,7 +12,8 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/latticetower/kaggle-kernelifier",
-    packages=setuptools.find_packages(),
+    packages=['src/kaggle_kernelifier'],
+    scripts=['src/kaggle_kernelifier/convert2ipynb.py'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -21,9 +22,9 @@ setuptools.setup(
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
     ],  # available at https://pypi.org/classifiers/
-    entry_points={  # points to where the cli is located
-        "console_scripts": [
-            # TODO: fill this
-        ]
-    }
+    install_requires=[
+        'matplotlib',
+        'networkx',
+        'numpy'
+    ],
 )
