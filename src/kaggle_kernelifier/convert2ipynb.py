@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import argparse
 import json
 import os
@@ -111,6 +112,8 @@ def walk_deps(filename, processed=set(),
         local_dirs=[], basedir="..", debug=False, split_header=True):
     with open(filename) as f:
         lines = f.readlines()
+    if len(lines) < 1:
+        return
     # local_dirs = [
     #     os.path.join(base, f) for base, dirs, files in os.walk(basedir)
     #     for f in files
@@ -201,7 +204,7 @@ def make_graph(start_file="../scripts/runner.py", basedir=".."):
     return G
 
 
-class DepGraph:
+class DependencyGraph:
     def __init__(self, mainpy, basedir="."):
         self.graph = make_graph(mainpy, basedir=basedir)
 
@@ -227,6 +230,7 @@ def read_file(file_path):
         lines = f.readlines()
     return lines
 
+
 def strip_lines(lines):
     i = 0
     j = 0
@@ -237,6 +241,7 @@ def strip_lines(lines):
         if len(lines[j].strip()) > 0:
             break
     return lines[i : j + 1]
+
 
 def wrap2cell(data, ctype="code"):
     code_params = {
@@ -258,10 +263,10 @@ if __name__ == "__main__":
     parser.add_argument("mainpy", help="path or name of main file which contains runnable code")
     parser.add_argument("savepath", help="path where .ipynb notebook should be saved")
     parser.add_argument("--draw", action="store_true",
-        help="use this flag to indicate that graph should be saved")
+        help="use this flag to indicate that dependency graph should be saved (can be used for debug purposes)")
     args = parser.parse_args()
 
-    graph = DepGraph(args.mainpy)
+    graph = DependencyGraph(args.mainpy)
     if args.draw:
         graph.draw()
     try:
