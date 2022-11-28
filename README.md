@@ -64,4 +64,6 @@ pip install -e .
 
 Currently the script only processes imports.
 
+As you can see at [my kaggle-arc repo](https://github.com/latticetower/kaggle-arc), the current scheme corresponds to the situation where the dependencies are in the current directory, and the runnable script is in some subfolder. I plan to add the parameter to make that optional and search for the dependencies in script's parent folder or in current folder. 
+
 
