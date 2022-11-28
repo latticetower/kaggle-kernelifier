@@ -9,7 +9,9 @@ The script is based on the one I've developed for [the ARC Challenge](https://gi
 
 # Usage
 
-Let's suppose that inside of some folder <folder> we have the following:
+## Input
+
+Let's suppose that inside of some relative or absolute path \<path to folder\> we have the following:
 
 ```
 folder_a/
@@ -17,8 +19,9 @@ folder_b/
 ...
 script.py
 ```
+The `script.py` is our main script. The folder might contain other scripts, files, folders with other scripts.
 
-In our script.py we have imports like
+In our `script.py` we have imports like
 ```
 from folder_a.script1 import foo
 import folder_b
@@ -39,6 +42,15 @@ To collect all this to one jupyter notebook, we might want to do the following:
 
 Basically, the script does all this and collects the output to single jupyter notebook file. 
 
+## How to run the script
+
+With the example provided above, we can run the script with the command
+
+```
+convert2ipynb.py <path to folder>/script.py <where to save>/<notebook name>.ipynb
+```
+
+Currently there is also an additional flag `--draw`, which is used for debug purposes. It outputs the dependency graph as a png image. Use it carefully!
 
 # Installation
 
@@ -49,5 +61,7 @@ pip install -e .
 ```
 
 # Limitations
+
+Currently the script only processes imports.
 
 
